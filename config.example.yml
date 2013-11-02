@@ -1,0 +1,10 @@
+mqtt:
+  broker: api.xively.com
+  port: 1883
+  username: <xively_api_key_here>
+sensors:
+  R1:
+    RIVR:
+      mqtt_endpoint: 
+      publish_id: sensor1
+    

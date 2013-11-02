@@ -7,11 +7,8 @@ Set up with
     
     pip install -r requirements.txt
     
-Set the environment variables:
+Copy config.example.yml to config.yml and add details for your various sensors and MQTT broker.
 
-    MQTT_ENDPOINT
-    MQTT_API_KEY  
-  
 Then run:
 
     ./sensor_mqtt.py
