@@ -9,11 +9,15 @@ mqtt:
 sensors:
   R1:
     RIVR:
+      base: 200
+      threshold: 180
       latitude: 51.772222
       longitude: -1.289722
       units: cm
   T5:
     TMPA:
+      base: 40
+      threshold: 10
       latitude: 51.772222
       longitude: -1.289722
       units: c

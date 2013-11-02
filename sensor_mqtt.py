@@ -34,6 +34,7 @@ def publish(sensor, reading_type, reading):
         print("unknown sensor or reading type: " + sensor + " " + reading_type)
     else:
         if sensor_config:
+            now = time.ctime()
             data = { 
                 'version':'1.0.0', 
                 'datastreams': [ 
@@ -41,8 +42,17 @@ def publish(sensor, reading_type, reading):
                         "id" : sensor+'_'+reading_type,
                         "datapoints": [
                             {
-                                "at": time.ctime(),
-                                "value": reading
+                                "at": now,
+                                "value": sensor_config['base']-reading
+                            }
+                        ]
+                    },
+                    {
+                        "id" : sensor+'_'+reading_type+'_threshold',
+                        "datapoints": [
+                            {
+                                "at": now,
+                                "value": sensor_config['threshold']
                             }
                         ]
                     }
