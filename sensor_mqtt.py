@@ -74,7 +74,7 @@ while mqttc.loop() == 0:
         river = rawinput[2:6]
         number = rawinput[6:]
         number = number.rsplit('-')[0] #remove trailing dashes
-        publish(sensor,river,number)
+        publish(sensor,river,float(number))
     pass
 
 def cleanup():
