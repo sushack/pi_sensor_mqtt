@@ -56,13 +56,14 @@ def publish(sensor, reading_type, reading):
             print("message published: " + sensor + " " + reading_type)
     
 while mqttc.loop() == 0:
-    rawinput = serialFromWireless.readline()
-    rawinput = rawinput.strip().decode("utf-8")
-    sensor = rawinput[1:3]
-    river = rawinput[3:7]
-    number = rawinput[7:]
-    number = number.rsplit('-')[0]
-    publish(sensor,river,number)
+    if serialFromWireless.read() == b'a': #look for start of data package
+        rawinput = serialFromWireless.read(11).decode("utf-8") #'a' plus rest of message = 12 bytes
+        #chop up raw data input
+        sensor = rawinput[0:2]
+        river = rawinput[2:6]
+        number = rawinput[6:]
+        number = number.rsplit('-')[0] #remove trailing dashes
+        publish(sensor,river,number)
     pass
 
 def cleanup():
