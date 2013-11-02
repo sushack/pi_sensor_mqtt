@@ -3,7 +3,7 @@
 import mosquitto
 import serial
 import os
-import time
+from datetime import datetime, date, time
 import json
 import random
 import yaml
@@ -41,7 +41,7 @@ def publish(sensor, reading_type, reading):
                         "id" : sensor+'_'+reading_type,
                         "datapoints": [
                             {
-                                "at": time.ctime(),
+                                "at": datetime.now().isoformat(),
                                 "value": reading
                             }
                         ]
