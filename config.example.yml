@@ -8,7 +8,14 @@ sensors:
   R1:
     RIVR:
       mqtt_endpoint: 
-      publish_id: sensor1
+      publish_id: riverheight
+      latitude: 51.772222
+      longitude: -1.289722
+    
+  T5:
+    TMPA:
+      mqtt_endpoint: 
+      publish_id: temperature
       latitude: 51.772222
       longitude: -1.289722
     
