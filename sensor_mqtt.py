@@ -22,27 +22,31 @@ mqttc.connect(config['mqtt']['broker'], config['mqtt']['port'], 60, True)
 
 
 def publish(sensor, reading_type, reading):
-    sensor_config = config['sensors'][sensor][reading_type]
-    if sensor_config:
-        data = { 
-            'version':'1.0.0', 
-            'datastreams': [ 
-                {
-                    "id" : sensor_config['publish_id'],
-                    "datapoints": [
-                        {
-                            "at": time.ctime(),
-                            "value": reading
-                        }
-                     ]
-                }
-            ]
-        }
-        mqttc.publish(sensor_config['mqtt_endpoint'], json.dumps(data))
+    try:
+        sensor_config = config['sensors'][sensor][reading_type]
+    except KeyError:
+        print "unknown sensor or reading type: " + sensor + " " + reading_type
+    else:
+        if sensor_config:
+            data = { 
+                'version':'1.0.0', 
+                'datastreams': [ 
+                    {
+                        "id" : sensor_config['publish_id'],
+                        "datapoints": [
+                            {
+                                "at": time.ctime(),
+                                "value": reading
+                            }
+                         ]
+                    }
+                ]
+            }
+            mqttc.publish(sensor_config['mqtt_endpoint'], json.dumps(data))
+            print "message published: " + sensor + " " + reading_type
     
 while mqttc.loop() == 0:
     publish("R1", "RIVR", random.randrange(0,255))
-    print "message published"
     time.sleep(1)
     pass
     
