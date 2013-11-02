@@ -26,3 +26,7 @@ There are better ways of doing some of the steps above, but configuring those is
 ## Run
 
     ./sensor_mqtt.py
+    
+## License
+
+This code is released as Open Source under the MIT license. See LICENSE.md for details.
