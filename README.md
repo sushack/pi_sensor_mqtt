@@ -1,15 +1,28 @@
-pi_sensor_mqtt
-==============
+#pi_sensor_mqtt
 
 Reads sensor data from serial wireless sensors and publishes to an MQTT broker.
 
-Set up with
+## Requirements
 
+ * Python 3.2
+ * virtualenv & virtualenvwrapper
+
+## Setup
+    
+    git clone https://github.com/sushack/pi_sensor_mqtt.git
+    cd pi_sensor_mqtt
+    source /usr/bin/virtualenvwrapper.sh
     workon pi_sensor_mqtt
     pip install -r requirements.txt
     
-Copy config.example.yml to config.yml and add details for your various sensors and MQTT broker.
+Copy config.example.yml to config.yml and add details for your gateway uuid, serial port, sensors, MQTT broker, etc.
 
-Then run:
+Plug in the serial receiver and make sure you have read permissions on the device:
+
+    sudo chmod a+r /dev/ttyACM0
+
+There are better ways of doing some of the steps above, but configuring those is left as an exercise for the reader.
+
+## Run
 
     ./sensor_mqtt.py
