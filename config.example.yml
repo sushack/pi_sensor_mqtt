@@ -1,3 +1,5 @@
+serial:
+  port: /dev/tty.usbmodem000001
 mqtt:
   broker: api.xively.com
   port: 1883

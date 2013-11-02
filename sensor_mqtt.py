@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import mosquitto
+import serial
 import os
 import time
 import json
@@ -17,6 +18,8 @@ mqttc = mosquitto.Mosquitto(client_uniq)
 mqttc.username_pw_set(config['mqtt']['username'])
 mqttc.connect(config['mqtt']['broker'], config['mqtt']['port'], 60, True)
 
+serialFromWireless = serial.Serial(config['serial']['port'])
+serialFromWireless.flushInput()
 
 
 def publish(sensor, reading_type, reading):
@@ -48,11 +51,16 @@ def publish(sensor, reading_type, reading):
             print("message published: " + sensor + " " + reading_type)
     
 while mqttc.loop() == 0:
-    publish("R1", "RIVR", random.randrange(0,255))
-    time.sleep(1)
+    rawinput = serialFromWireless.readline()
+    rawinput = rawinput.strip().decode("utf-8")
+    sensor = rawinput[1:3]
+    river = rawinput[3:7]
+    number = rawinput[7:]
+    number = number.rsplit('-')[0]
+    publish(sensor,river,number)
     pass
-    
 
 def cleanup():
     print("Ending and cleaning up")
+    serialFromWireless.close()
     mqttc.disconnect()
