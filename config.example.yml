@@ -7,4 +7,6 @@ sensors:
     RIVR:
       mqtt_endpoint: 
       publish_id: sensor1
+      latitude: 51.772222
+      longitude: -1.289722
     

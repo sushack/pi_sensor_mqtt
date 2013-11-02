@@ -38,9 +38,13 @@ def publish(sensor, reading_type, reading):
                                 "at": time.ctime(),
                                 "value": reading
                             }
-                         ]
+                        ]
                     }
-                ]
+                ],
+                "location": {
+                    "lat": sensor_config['latitude'],
+                    "lon": sensor_config['longitude']
+                }
             }
             mqttc.publish(sensor_config['mqtt_endpoint'], json.dumps(data))
             print "message published: " + sensor + " " + reading_type
