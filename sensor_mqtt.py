@@ -38,7 +38,7 @@ def publish(reading):
 while mqttc.loop() == 0:
     publish(random.randrange(0,255))
     print "message published"
-    time.sleep(0.5)
+    time.sleep(10)
     pass
     
 
