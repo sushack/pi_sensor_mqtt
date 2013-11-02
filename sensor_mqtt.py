@@ -11,8 +11,6 @@ import yaml
 stream = open("config.yml", 'r')
 config = yaml.load(stream)
 
-endpoint = os.environ['MQTT_ENDPOINT']
-
 mypid = os.getpid()
 client_uniq = "sensor_mqtt_"+str(mypid)
 mqttc = mosquitto.Mosquitto(client_uniq)
