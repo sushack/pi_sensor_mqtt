@@ -18,7 +18,7 @@ config = yaml.load(stream)
 mypid = os.getpid()
 client_uniq = "sensor_mqtt_"+str(mypid)
 mqttc = mosquitto.Mosquitto(client_uniq)
-mqttc.username_pw_set(config['mqtt']['username'])
+mqttc.username_pw_set(config['mqtt']['username'], config['mqtt']['password'])
 mqttc.connect(config['mqtt']['broker'], config['mqtt']['port'], 60, True)
 
 serialFromWireless = serial.Serial(config['serial']['port'])
