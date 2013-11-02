@@ -12,3 +12,8 @@ sensors:
       latitude: 51.772222
       longitude: -1.289722
       units: cm
+  T5:
+    TMPA:
+      latitude: 51.772222
+      longitude: -1.289722
+      units: c
