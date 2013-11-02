@@ -42,7 +42,8 @@ def publish(sensor, reading_type, reading):
                         "datapoints": [
                             {
                                 "at": datetime.now().isoformat(),
-                                "value": reading
+                                "value": reading,
+                                "units": sensor_config["units"]                                
                             }
                         ]
                     }
