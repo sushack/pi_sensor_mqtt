@@ -4,6 +4,7 @@ import mosquitto
 import os
 import time
 import json
+import random
 
 broker = "api.xively.com"
 port = 1883
@@ -35,7 +36,7 @@ def publish(reading):
     mqttc.publish(endpoint, json.dumps(data))
     
 while mqttc.loop() == 0:
-    publish(27)
+    publish(random.randrange(0,255))
     print "message published"
     time.sleep(0.5)
     pass
