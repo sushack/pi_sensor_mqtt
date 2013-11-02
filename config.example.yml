@@ -1,14 +1,14 @@
+uuid: <generated_uuid_here>
 serial:
   port: /dev/tty.usbmodem000001
 mqtt:
   broker: api.xively.com
   port: 1883
-  username: <xively_api_key_here>
+  username: <xively_api_key_here_or_similar>
+  topic_override: <xively_feed_url_if_using_xively>
 sensors:
   R1:
     RIVR:
-      mqtt_endpoint: 
-      publish_id: sensor1
       latitude: 51.772222
       longitude: -1.289722
-    
+      units: cm

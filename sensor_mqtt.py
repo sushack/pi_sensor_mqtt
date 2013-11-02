@@ -21,6 +21,11 @@ mqttc.connect(config['mqtt']['broker'], config['mqtt']['port'], 60, True)
 serialFromWireless = serial.Serial(config['serial']['port'])
 serialFromWireless.flushInput()
 
+def mqtt_topic(sensor, reading_type):
+    try:
+        return config['mqtt']['topic_override']
+    except KeyError:
+        return '/oxflood/'+config['uuid']+'/'+sensor+'/'+reading_type
 
 def publish(sensor, reading_type, reading):
     try:
@@ -33,7 +38,7 @@ def publish(sensor, reading_type, reading):
                 'version':'1.0.0', 
                 'datastreams': [ 
                     {
-                        "id" : sensor_config['publish_id'],
+                        "id" : sensor+'_'+reading_type,
                         "datapoints": [
                             {
                                 "at": time.ctime(),
@@ -47,7 +52,7 @@ def publish(sensor, reading_type, reading):
                     "lon": sensor_config['longitude']
                 }
             }
-            mqttc.publish(sensor_config['mqtt_endpoint'], json.dumps(data))
+            mqttc.publish(mqtt_topic(sensor, reading_type), json.dumps(data))
             print("message published: " + sensor + " " + reading_type)
     
 while mqttc.loop() == 0:
