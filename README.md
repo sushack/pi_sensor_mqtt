@@ -5,7 +5,7 @@ Reads sensor data from serial wireless sensors and publishes to an MQTT broker.
 ## Requirements
 
  * Python 3.2
- * virtualenv & virtualenvwrapper
+ * virtualenv & virtualenvwrapper (http://virtualenvwrapper.readthedocs.org/en/latest/)
 
 ## Setup
     
